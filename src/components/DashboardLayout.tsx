@@ -2,7 +2,7 @@
 
 import Sidebar from '@/components/Sidebar'
 import Topbar from '@/components/Topbar'
-import { TourProvider, tourConfig, TourBadge } from '@/components/Tour'
+import { TourProvider, tourConfig } from '@/components/Tour'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
@@ -29,9 +29,6 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             {children}
           </main>
         </div>
-        
-        {/* Tour Badge (Start Tour Button) */}
-        <TourBadge />
       </div>
     </TourProvider>
   )
