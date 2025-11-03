@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
+import DashboardLayout from '@/components/DashboardLayout'
 import { ArrowLeft, Calendar, DollarSign, Home, User, FileText, TrendingUp, Shield, Wrench, AlertCircle, CheckCircle, Upload } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -85,30 +86,34 @@ export default function ContractDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading contract details...</p>
+      <DashboardLayout>
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sky-500 border-t-transparent mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading contract details...</p>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     )
   }
 
   if (error || !contract) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">Contract Not Found</h2>
-          <p className="text-gray-600 mb-4">{error || 'The requested contract could not be found.'}</p>
-          <button
-            onClick={() => router.push('/')}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Back to Dashboard
-          </button>
+      <DashboardLayout>
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="text-center">
+            <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">Contract Not Found</h2>
+            <p className="text-gray-600 mb-4">{error || 'The requested contract could not be found.'}</p>
+            <button
+              onClick={() => router.push('/properties')}
+              className="bg-gradient-to-r from-sky-400 to-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:from-sky-500 hover:to-purple-600 transition-all duration-200 shadow-sm hover:shadow-md"
+            >
+              Back to Properties
+            </button>
+          </div>
         </div>
-      </div>
+      </DashboardLayout>
     )
   }
 
@@ -128,20 +133,20 @@ export default function ContractDetailPage() {
   const docCompleteness = Math.round((completedDocs / totalDocs) * 100)
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
+    <DashboardLayout>
+      <div className="p-4 sm:p-6 lg:p-8 bg-white min-h-screen w-full max-w-full">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
             <div className="flex items-center gap-4">
               <button
-                onClick={() => router.push('/')}
+                onClick={() => router.push('/properties')}
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{contract.property.name}</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{contract.property.name}</h1>
                 <p className="text-sm text-gray-600">Contract {contract.contract_no}</p>
               </div>
             </div>
@@ -154,20 +159,17 @@ export default function ContractDetailPage() {
               )}>
                 {contract.status?.charAt(0).toUpperCase() + contract.status?.slice(1)}
               </span>
-              <button className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="bg-gradient-to-r from-sky-400 to-purple-500 text-white px-4 py-2 rounded-lg font-semibold hover:from-sky-500 hover:to-purple-600 transition-all duration-200 shadow-sm hover:shadow-md">
                 Renew Lease
               </button>
             </div>
           </div>
         </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-6">
         {/* Property Header */}
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-6">
           <div className="flex items-start gap-4">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-              <User className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 bg-gradient-to-r from-sky-50 to-purple-50 rounded-lg flex items-center justify-center">
+              <User className="w-6 h-6 text-sky-600" />
             </div>
             <div className="flex-1">
               <h2 className="text-xl font-semibold text-gray-900">{contract.property.name}</h2>
@@ -185,7 +187,7 @@ export default function ContractDetailPage() {
         {/* Main Dashboard Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Financial Health */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Financial Health</h3>
             <p className="text-sm text-gray-600 mb-4">Yield metrics and performance indicators</p>
             
@@ -201,11 +203,11 @@ export default function ContractDetailPage() {
               
               <div className="bg-gray-50 rounded-lg p-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <DollarSign className="w-4 h-4 text-blue-600" />
+                  <DollarSign className="w-4 h-4 text-sky-600" />
                   <span className="text-sm text-gray-600">Rent Collected</span>
                 </div>
                 <p className="text-2xl font-bold text-gray-900">AED {rentCollected.toLocaleString()}</p>
-                <p className="text-xs text-blue-600">{collectionPercentage}% received</p>
+                <p className="text-xs text-sky-600">{collectionPercentage}% received</p>
               </div>
               
               <div className="bg-gray-50 rounded-lg p-4">
@@ -227,18 +229,18 @@ export default function ContractDetailPage() {
               </div>
             </div>
             
-            <div className="mt-4 p-4 bg-blue-50 rounded-lg">
+            <div className="mt-4 p-4 bg-gradient-to-r from-sky-50 to-purple-50 rounded-lg">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="w-4 h-4 text-blue-600" />
+                <TrendingUp className="w-4 h-4 text-sky-600" />
                 <span className="text-sm font-medium text-gray-900">Expected Renewal Rent</span>
               </div>
-              <p className="text-xl font-bold text-blue-900">AED {suggestedRent.toLocaleString()}</p>
-              <p className="text-xs text-blue-600">+5.0% within RERA cap</p>
+              <p className="text-xl font-bold text-sky-900">AED {suggestedRent.toLocaleString()}</p>
+              <p className="text-xs text-sky-600">+5.0% within RERA cap</p>
             </div>
           </div>
 
           {/* Document Completeness */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Document Completeness</h3>
             
             <div className="mb-4">
@@ -248,7 +250,7 @@ export default function ContractDetailPage() {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div 
-                  className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+                  className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full transition-all duration-300"
                   style={{ width: `${docCompleteness}%` }}
                 ></div>
               </div>
@@ -262,7 +264,7 @@ export default function ContractDetailPage() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm text-gray-900">Tenancy Contract</span>
                 </div>
-                <button className="text-blue-600 text-sm hover:text-blue-800">View</button>
+                <button className="text-sky-600 text-sm hover:text-sky-800 transition-colors">View</button>
               </div>
               
               <div className="flex items-center justify-between">
@@ -270,7 +272,7 @@ export default function ContractDetailPage() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm text-gray-900">Move-in NOC</span>
                 </div>
-                <button className="text-blue-600 text-sm hover:text-blue-800">View</button>
+                <button className="text-sky-600 text-sm hover:text-sky-800 transition-colors">View</button>
               </div>
               
               <div className="flex items-center justify-between">
@@ -296,7 +298,7 @@ export default function ContractDetailPage() {
           </div>
 
           {/* Maintenance & Responsibilities */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Maintenance & Responsibilities</h3>
             <p className="text-sm text-gray-600 mb-4">Cost allocation and service responsibilities</p>
             
@@ -338,7 +340,7 @@ export default function ContractDetailPage() {
           </div>
 
           {/* Key Insights */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Key Insights</h3>
             <p className="text-sm text-gray-600 mb-4">AI-powered recommendations</p>
             
@@ -349,7 +351,7 @@ export default function ContractDetailPage() {
                 </p>
               </div>
               
-              <div className="p-3 bg-blue-50 rounded-lg">
+              <div className="p-3 bg-gradient-to-r from-sky-50 to-purple-50 rounded-lg">
                 <p className="text-sm text-gray-700">
                   RERA cap allows <strong>+5% increase</strong> → suggested new rent <strong>AED {suggestedRent.toLocaleString()}</strong>.
                 </p>
@@ -361,14 +363,14 @@ export default function ContractDetailPage() {
         {/* Contact Information & Security Deposit */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
           {/* Security Deposit */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Security Deposit</h3>
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600">Held by Landlord</p>
                 <p className="text-3xl font-bold text-gray-900">AED {contract.deposit_aed?.toLocaleString()}</p>
               </div>
-              <Shield className="w-12 h-12 text-blue-600" />
+              <Shield className="w-12 h-12 text-sky-600" />
             </div>
             <div className="mt-4 p-3 bg-orange-50 rounded-lg">
               <p className="text-sm text-gray-700">
@@ -378,7 +380,7 @@ export default function ContractDetailPage() {
           </div>
 
           {/* Contact Information */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
             
             <div className="space-y-4">
@@ -410,8 +412,8 @@ export default function ContractDetailPage() {
             </div>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </DashboardLayout>
   )
 }
 

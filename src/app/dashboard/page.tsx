@@ -79,8 +79,6 @@ export default function Dashboard() {
 
   const rentalCards = serviceCards.filter(c => c.category === 'rental')
   const operationsCards = serviceCards.filter(c => c.category === 'operations')
-  const leadCards = serviceCards.filter(c => c.category === 'lead')
-  const communicationCards = serviceCards.filter(c => c.category === 'communication')
 
   return (
     <DashboardLayout>
@@ -243,57 +241,42 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Lead Management Section */}
+          {/* Performance Metrics Charts */}
           <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Lead Management</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {leadCards.map((card, index) => {
-                const Icon = card.icon
-                return (
-                  <div
-                    key={index}
-                    className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all hover:border-sky-200 cursor-pointer group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-sky-50 to-purple-50 rounded-lg flex items-center justify-center group-hover:from-sky-100 group-hover:to-purple-100 transition-colors">
-                        <Icon className="w-6 h-6 text-gray-700" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-1">{card.title}</h3>
-                        <p className="text-sm text-gray-600">{card.description}</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-sky-500 transition-colors" />
-                    </div>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Performance Metrics</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Lead-to-Lease Timeline Reduction */}
+              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-gray-900 mb-2">65%</div>
+                  <div className="text-sm font-medium text-gray-700">Reduction in Lead-to-Lease Timeline</div>
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '65%' }}></div>
                   </div>
-                )
-              })}
-            </div>
-          </div>
+                </div>
+              </div>
 
-          {/* Communication Section */}
-          <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Communication</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {communicationCards.map((card, index) => {
-                const Icon = card.icon
-                return (
-                  <div
-                    key={index}
-                    className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all hover:border-sky-200 cursor-pointer group"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-gradient-to-r from-sky-50 to-purple-50 rounded-lg flex items-center justify-center group-hover:from-sky-100 group-hover:to-purple-100 transition-colors">
-                        <Icon className="w-6 h-6 text-gray-700" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-1">{card.title}</h3>
-                        <p className="text-sm text-gray-600">{card.description}</p>
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-gray-400 group-hover:text-sky-500 transition-colors" />
-                    </div>
+              {/* Ad Spend Reduction */}
+              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-gray-900 mb-2">40%</div>
+                  <div className="text-sm font-medium text-gray-700">Reduction in Ad Spend</div>
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '40%' }}></div>
                   </div>
-                )
-              })}
+                </div>
+              </div>
+
+              {/* Lead-to-Lease Rate */}
+              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-gray-900 mb-2">8%</div>
+                  <div className="text-sm font-medium text-gray-700">Lead-to-Lease Rate</div>
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '8%' }}></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

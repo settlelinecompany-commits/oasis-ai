@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import DashboardLayout from '@/components/DashboardLayout'
 import { Upload, Search, FileText, Calendar, Building, Filter, ChevronDown, MessageSquare, TrendingUp, Users, Plus, X, Eye, Download } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -26,13 +27,13 @@ interface Contract {
 }
 
 export default function Properties() {
+  const router = useRouter()
   const [contracts, setContracts] = useState<Contract[]>([])
   const [searchQuery, setSearchQuery] = useState('')
   const [filterStatus, setFilterStatus] = useState<'all' | 'active' | 'expired' | 'upcoming'>('all')
   const [loading, setLoading] = useState(false)
   const [isSearching, setIsSearching] = useState(false)
   const [uploading, setUploading] = useState(false)
-  const [selectedContractId, setSelectedContractId] = useState<string>('')
   const [showUploadArea, setShowUploadArea] = useState(false)
   const [dragActive, setDragActive] = useState(false)
   
@@ -432,7 +433,7 @@ export default function Properties() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => setSelectedContractId(contract.id)}
+                          onClick={() => router.push(`/contracts/${contract.id}`)}
                           className="text-sky-600 hover:text-sky-800 transition-colors"
                         >
                           <Eye className="w-4 h-4" />
