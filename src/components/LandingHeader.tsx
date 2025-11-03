@@ -39,7 +39,7 @@ export default function LandingHeader() {
           {/* CTA Buttons */}
           <div className="flex items-center gap-3">
             <Link
-              href="/"
+              href="/dashboard"
               className="bg-gradient-to-r from-sky-400 to-purple-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:from-sky-500 hover:to-purple-600 transition-all duration-200 shadow-sm hover:shadow-md"
             >
               Try Now

@@ -183,7 +183,7 @@ export default function LandingPage() {
           </p>
           <div className="mt-10">
             <a
-              href="/"
+              href="/dashboard"
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-sky-400 to-purple-500 text-white font-semibold rounded-lg hover:from-sky-500 hover:to-purple-600 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Get Started
