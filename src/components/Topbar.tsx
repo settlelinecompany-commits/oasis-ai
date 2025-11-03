@@ -11,11 +11,9 @@ export default function Topbar() {
       <div className="flex items-center justify-between px-6 h-16">
         {/* Left: Logo */}
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold">Settleline</span>
-            <span className="text-gray-400">•</span>
-            <span className="text-lg font-semibold text-gray-700">SalesGPT</span>
-          </div>
+          <span className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-purple-500 bg-clip-text text-transparent">
+            OasisAI
+          </span>
         </div>
 
         {/* Right: Actions */}

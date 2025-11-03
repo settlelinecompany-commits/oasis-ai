@@ -28,16 +28,16 @@ export default function ChatHistory({ onCollapse, collapsed = false }: ChatHisto
     <div className="w-80 bg-gray-100 border-r border-gray-300 flex flex-col">
       {/* Top Bar Title */}
       <div className="px-4 py-3 border-b border-gray-300 bg-white">
-        <p className="text-xs font-medium text-gray-700">Settleline • SalesGPT</p>
+        <p className="text-xs font-medium text-gray-700">OasisAI</p>
       </div>
       
-      {/* SalesGPT Header with Logo */}
+      {/* OasisAI Header with Logo */}
       <div className="px-4 py-4 border-b border-gray-300 bg-white">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-lg flex items-center justify-center shadow-sm">
+          <div className="w-10 h-10 bg-gradient-to-r from-sky-400 to-purple-500 rounded-lg flex items-center justify-center shadow-sm">
             <Sparkles className="w-6 h-6 text-white" />
           </div>
-          <span className="font-bold text-base text-gray-900">SalesGPT</span>
+          <span className="font-bold text-base text-gray-900">OasisAI</span>
         </div>
       </div>
       

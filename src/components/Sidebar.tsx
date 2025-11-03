@@ -1,70 +1,134 @@
 'use client'
 
 import { 
-  Sparkles, 
-  Search, 
-  List, 
-  Mail, 
-  Phone, 
-  Radio, 
-  Globe, 
+  Home,
+  Building,
   Bot,
-  BarChart3
+  UserSearch,
+  Calendar,
+  Users,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
+  Mail,
+  Phone,
+  MessageSquare,
+  FileText,
+  Wrench,
+  Receipt,
+  MapPin,
+  Wallet,
+  Coins,
+  RotateCcw,
+  Globe
 } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 export default function Sidebar() {
   const router = useRouter()
   const pathname = usePathname()
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    workspace: true,
+    others: false
+  })
 
-  const navItems = [
-    {
-      category: 'SalesGPT',
-      items: [
-        { label: 'Insights', icon: Sparkles, path: '/salesgpt' },
-      ]
-    },
-    {
-      category: 'Prospect',
-      items: [
-        { label: 'Prospect Search', icon: Search, path: '/salesgpt/prospects/search' },
-        { label: 'Prospect Lists', icon: List, path: '/salesgpt/prospects/lists' },
-      ]
-    },
-    {
-      category: 'Engage',
-      items: [
-        { label: 'Campaigns', icon: Radio, path: '/salesgpt/campaigns' },
-        { label: 'Inbox', icon: Mail, path: '/salesgpt/inbox' },
-        { label: 'Power Dialer', icon: Phone, path: '/salesgpt/dialer' },
-      ]
-    },
-    {
-      category: 'Signals',
-      items: [
-        { label: 'Website Intent', icon: Globe, path: '/salesgpt/signals/website' },
-        { label: 'Agents', icon: Bot, path: '/salesgpt/signals/agents' },
-      ]
-    },
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }))
+  }
+
+  const workspaceItems = [
+    { label: 'Home', icon: Home, path: '/dashboard' },
+    { label: 'Properties', icon: Building, path: '/properties' },
+    { label: 'AI Agents', icon: Bot, path: '/agents' },
+    { label: 'Leads', icon: UserSearch, path: '/leads', badge: '8' },
+    { label: 'Calendar', icon: Calendar, path: '/calendar' },
+  ]
+
+  const othersItems = [
+    { label: 'Team', icon: Users, path: '/team' },
+    { label: 'Help', icon: HelpCircle, path: '/help' },
   ]
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-gray-100 text-gray-900 border-r border-gray-300">
+    <aside className="fixed left-0 top-0 h-full w-64 bg-white text-gray-900 border-r border-gray-200">
       <div className="flex flex-col h-full">
         {/* Header */}
-        <div className="px-4 py-4 border-b border-gray-300">
-          <h2 className="text-sm font-bold text-gray-900 uppercase tracking-wide">SALESGPT</h2>
+        <div className="px-6 py-6 border-b border-gray-200">
+          <div className="flex items-center gap-2">
+            <span className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-purple-500 bg-clip-text text-transparent">
+              OasisAI
+            </span>
+          </div>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-6">
-          {navItems.map((category) => (
-            <div key={category.category}>
-              <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-3 mb-2">
-                {category.category === 'SalesGPT' ? '' : category.category}
-              </div>
+          {/* WORKSPACE Section */}
+          <div>
+            <button
+              onClick={() => toggleSection('workspace')}
+              className="w-full flex items-center justify-between px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              <span>WORKSPACE</span>
+              {expandedSections.workspace ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </button>
+            {expandedSections.workspace && (
               <div className="space-y-1">
-                {category.items.map((item) => {
+                {workspaceItems.map((item) => {
+                  const Icon = item.icon
+                  const isActive = pathname === item.path
+                  return (
+                    <button
+                      key={item.label}
+                      onClick={() => router.push(item.path)}
+                      className={`w-full flex items-center justify-between gap-3 px-3 py-2.5 rounded-lg transition-colors ${
+                        isActive
+                          ? 'bg-gradient-to-r from-sky-50 to-purple-50 text-gray-900 font-medium shadow-sm'
+                          : 'text-gray-700 hover:bg-gray-100'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-gray-900' : 'text-gray-600'}`} />
+                        <span className={`text-sm ${isActive ? 'text-gray-900 font-medium' : 'text-gray-700'}`}>
+                          {item.label}
+                        </span>
+                      </div>
+                      {item.badge && (
+                        <span className="text-xs px-2 py-0.5 bg-gray-200 text-gray-700 rounded-full font-medium">
+                          {item.badge}
+                        </span>
+                      )}
+                    </button>
+                  )
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* OTHERS Section */}
+          <div>
+            <button
+              onClick={() => toggleSection('others')}
+              className="w-full flex items-center justify-between px-3 mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wider"
+            >
+              <span>OTHERS</span>
+              {expandedSections.others ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </button>
+            {expandedSections.others && (
+              <div className="space-y-1">
+                {othersItems.map((item) => {
                   const Icon = item.icon
                   const isActive = pathname === item.path
                   return (
@@ -73,39 +137,34 @@ export default function Sidebar() {
                       onClick={() => router.push(item.path)}
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors ${
                         isActive
-                          ? 'bg-gray-200 text-gray-900 font-medium shadow-sm'
-                          : 'text-gray-700 hover:bg-gray-200'
+                          ? 'bg-gradient-to-r from-sky-50 to-purple-50 text-gray-900 font-medium shadow-sm'
+                          : 'text-gray-700 hover:bg-gray-100'
                       }`}
                     >
                       <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-gray-900' : 'text-gray-600'}`} />
-                      <span className={`text-sm ${isActive ? 'text-gray-900 font-medium' : 'text-gray-700'}`}>{item.label}</span>
+                      <span className={`text-sm ${isActive ? 'text-gray-900 font-medium' : 'text-gray-700'}`}>
+                        {item.label}
+                      </span>
                     </button>
                   )
                 })}
               </div>
-            </div>
-          ))}
+            )}
+          </div>
         </nav>
 
-        {/* Credits Section */}
-        <div className="p-4 border-t border-gray-300">
-          <div className="bg-white rounded-lg p-3 space-y-2 border border-gray-200 shadow-sm">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="w-5 h-5 bg-gray-900 rounded flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">N</span>
-                </div>
-                <span className="text-xs font-medium text-gray-700">Credits</span>
+        {/* User Profile Section */}
+        <div className="p-4 border-t border-gray-200">
+          <div className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 bg-gradient-to-r from-sky-400 to-purple-500 rounded-full flex items-center justify-center">
+                <span className="text-white text-xs font-bold">Y</span>
               </div>
-              <span className="text-xs px-2 py-0.5 bg-orange-500/10 text-orange-600 rounded font-medium">Hobby</span>
+              <div className="flex flex-col">
+                <span className="text-xs font-medium text-gray-900">your@email.com</span>
+              </div>
             </div>
-            <div className="text-xs text-gray-500">
-              Your free trial will expire on November 7th, 2025.
-            </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
-              <div className="bg-gradient-to-r from-orange-400 to-yellow-400 h-2 rounded-full" style={{ width: '96%' }}></div>
-            </div>
-            <div className="text-xs text-gray-500 text-center">4.8k / 5k</div>
+            <ChevronDown className="w-4 h-4 text-gray-500" />
           </div>
         </div>
       </div>

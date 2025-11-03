@@ -1,18 +1,14 @@
 'use client'
 
-import { useState } from 'react'
-import Sidebar from './Sidebar'
-import Topbar from './Topbar'
-import ChatHistory from './ChatHistory'
-import { TourProvider, tourConfig, TourBadge } from './Tour'
+import Sidebar from '@/components/Sidebar'
+import Topbar from '@/components/Topbar'
+import { TourProvider, tourConfig, TourBadge } from '@/components/Tour'
 
 interface DashboardLayoutProps {
   children: React.ReactNode
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [chatHistoryCollapsed, setChatHistoryCollapsed] = useState(false)
-
   return (
     <TourProvider {...tourConfig}>
       <div className="flex h-screen bg-gray-50">
@@ -22,27 +18,16 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </div>
 
         {/* Main Content Area */}
-        <div className="flex-1 flex flex-col ml-64">
+        <div className="flex-1 flex flex-col ml-64 overflow-hidden">
           {/* Top Bar */}
           <div data-tour="topbar">
             <Topbar />
           </div>
 
-          {/* Content with Chat History */}
-          <div className="flex-1 flex overflow-hidden">
-            {/* Chat History Panel */}
-            <div data-tour="chat-history">
-              <ChatHistory
-                collapsed={chatHistoryCollapsed}
-                onCollapse={() => setChatHistoryCollapsed(!chatHistoryCollapsed)}
-              />
-            </div>
-
-            {/* Main Content */}
-            <main data-tour="main-content" className="flex-1 overflow-y-auto bg-white">
-              {children}
-            </main>
-          </div>
+          {/* Main Content */}
+          <main data-tour="main-content" className="flex-1 overflow-y-auto overflow-x-hidden bg-white w-full">
+            {children}
+          </main>
         </div>
         
         {/* Tour Badge (Start Tour Button) */}
