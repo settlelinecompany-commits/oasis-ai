@@ -81,37 +81,56 @@ export async function GET(
         : unit.properties
       : null
 
-    // Transform the data
+    // Transform the data to match the frontend ContractDetails interface
     const contract = {
       id: lease.id.toString(),
       contract_no: lease.contract_no || 'N/A',
-      tenant_name: tenantResult.data?.display_name || 'Tenant Name Not Available',
-      landlord_name: landlordResult.data?.display_name || 'Landlord Name Not Available',
-      tenant_email: tenantResult.data?.email || null,
-      landlord_email: landlordResult.data?.email || null,
-      tenant_phone: tenantResult.data?.phone_e164 || null,
-      landlord_phone: landlordResult.data?.phone_e164 || null,
-      property_address: unit && property ? `${unit.unit_no}, ${property.name}` : 'N/A',
-      rent_amount:
-        lease.annual_rent_aed && typeof lease.annual_rent_aed === 'number'
-          ? `AED ${lease.annual_rent_aed.toLocaleString()}`
-          : 'N/A',
-      lease_start: lease.start_date || 'N/A',
-      lease_end: lease.end_date || 'N/A',
-      security_deposit:
-        lease.deposit_aed && typeof lease.deposit_aed === 'number'
-          ? `AED ${lease.deposit_aed.toLocaleString()}`
-          : 'N/A',
-      property_size: unit?.size_sqm ? `${unit.size_sqm} SQ. M.` : 'N/A',
+      start_date: lease.start_date || 'N/A',
+      end_date: lease.end_date || 'N/A',
+      annual_rent_aed: lease.annual_rent_aed || 0,
+      deposit_aed: lease.deposit_aed || 0,
       status: lease.status || 'active',
-      uploaded_at: lease.created_at,
-      bedrooms: unit?.bedrooms || null,
-      furnished: unit?.furnished || false,
-      dewa_premise_no: unit?.dewa_premise_no || 'N/A',
-      community: property?.community || 'N/A',
-      plot_no: property?.plot_no || 'N/A',
-      property_name: property?.name || 'N/A',
-      unit_no: unit?.unit_no || 'N/A',
+      payment_terms: { cheques: 4 }, // Placeholder
+      raw_ocr: null,
+      
+      property: {
+        name: property?.name || 'N/A',
+        community: property?.community || 'N/A',
+        plot_no: property?.plot_no || 'N/A',
+      },
+      
+      unit: {
+        unit_no: unit?.unit_no || 'N/A',
+        unit_type: 'Apartment', // Placeholder
+        size_sqm: unit?.size_sqm || 0,
+        bedrooms: unit?.bedrooms || null,
+        dewa_premise_no: unit?.dewa_premise_no || 'N/A',
+        furnished: unit?.furnished || false,
+      },
+      
+      landlord: {
+        name: landlordResult.data?.display_name || 'Landlord Name Not Available',
+        email: landlordResult.data?.email || null,
+        phone: landlordResult.data?.phone_e164 || null,
+      },
+      
+      tenant: {
+        name: tenantResult.data?.display_name || 'Tenant Name Not Available',
+        email: tenantResult.data?.email || null,
+        phone: tenantResult.data?.phone_e164 || null,
+      },
+      
+      payments: [], // Placeholder - would come from payments table
+      documents: [
+        { name: 'Tenancy Contract', status: 'uploaded' },
+        { name: 'Move-in NOC', status: 'uploaded' },
+        { name: 'Ejari Certificate', status: 'missing' },
+        { name: 'Inventory List', status: 'missing' },
+      ],
+      responsibilities: [], // Placeholder
+      deposits: [{ amount_aed: lease.deposit_aed || 0, held_by: 'landlord' }],
+      renewals: [{ rera_cap_pct: 5, suggested_rent: Math.round((lease.annual_rent_aed || 0) * 1.05) }],
+      insights: [],
     }
 
     return NextResponse.json({
