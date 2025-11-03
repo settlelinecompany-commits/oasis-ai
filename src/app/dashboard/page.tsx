@@ -187,6 +187,45 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column - Service Cards */}
         <div className="lg:col-span-2 space-y-8">
+          {/* Performance Metrics Charts */}
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Performance Metrics</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Lead-to-Lease Timeline Reduction */}
+              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-gray-900 mb-2">65%</div>
+                  <div className="text-sm font-medium text-gray-700">Reduction in Lead-to-Lease Timeline</div>
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '65%' }}></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Ad Spend Reduction */}
+              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-gray-900 mb-2">40%</div>
+                  <div className="text-sm font-medium text-gray-700">Reduction in Ad Spend</div>
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '40%' }}></div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Lead-to-Lease Rate */}
+              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
+                <div className="text-center">
+                  <div className="text-5xl font-bold text-gray-900 mb-2">8%</div>
+                  <div className="text-sm font-medium text-gray-700">Lead-to-Lease Rate</div>
+                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '8%' }}></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           {/* Rental Management Section */}
           <div>
             <h2 className="text-xl font-bold text-gray-900 mb-4">Rental Management</h2>
@@ -238,45 +277,6 @@ export default function Dashboard() {
                   </div>
                 )
               })}
-            </div>
-          </div>
-
-          {/* Performance Metrics Charts */}
-          <div>
-            <h2 className="text-xl font-bold text-gray-900 mb-4">Performance Metrics</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Lead-to-Lease Timeline Reduction */}
-              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-gray-900 mb-2">65%</div>
-                  <div className="text-sm font-medium text-gray-700">Reduction in Lead-to-Lease Timeline</div>
-                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '65%' }}></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Ad Spend Reduction */}
-              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-gray-900 mb-2">40%</div>
-                  <div className="text-sm font-medium text-gray-700">Reduction in Ad Spend</div>
-                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '40%' }}></div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Lead-to-Lease Rate */}
-              <div className="bg-gradient-to-br from-sky-50 to-purple-50 border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-all">
-                <div className="text-center">
-                  <div className="text-5xl font-bold text-gray-900 mb-2">8%</div>
-                  <div className="text-sm font-medium text-gray-700">Lead-to-Lease Rate</div>
-                  <div className="mt-4 w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-gradient-to-r from-sky-400 to-purple-500 h-2 rounded-full" style={{ width: '8%' }}></div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
